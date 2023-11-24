@@ -1,0 +1,70 @@
+$side-margin: 2%;
+$top-margin: 2%;
+$bottom-margin: 2%;
+$border-radius: 10px;
+$padding: 2%;
+$line-height: 1.5;
+
+.text-field-container, .message{
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.5);
+}
+
+.message {
+  background-color: $secondary-background-color;
+  margin: $top-margin $side-margin $bottom-margin $side-margin;
+  padding: 2%;
+  border-radius: $border-radius;
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .display-name {
+      font-size: small;
+      color: white;
+      font-weight: bold;
+    }
+    .avatar {
+      margin: 1%;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: white;
+    }
+  }
+}
+.text-field-container {
+    margin: $top-margin $side-margin $bottom-margin $side-margin;
+    background-color: $secondary-background-color;
+    border-radius:  10pt;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    .text-field {
+        border-radius:  10pt;
+        border: none;
+        padding: $padding;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: $line-height;
+        width: 100%;
+      }
+    .text-field:active, .text-field:focus {
+        outline: none;
+      }
+    .submit-button {
+        border-radius:  $border-radius;
+        margin: 5px;
+        padding: 17px;
+        background-color: #d87093;
+        cursor: pointer;
+        &:hover {
+          background-color: #d3809c;
+          color: white;
+        }
+      }
+}
+
+
