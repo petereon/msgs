@@ -18,11 +18,25 @@ const createNewMessage: (body: string, sender: User) => Message = (body, sender)
 const TextField: React.FC = () => {
   const textField = useRef<HTMLDivElement>(null);
 
-  const currentMessage = useMessagePaneStore((state) => state.currentMessage)
+  const currentMessage = useMessagePaneStore((state) => state.textFieldContent)
   const updateCurrentMessage = useMessagePaneStore((state) => state.updateCurrentMessage)
   const appendMessage = useMessagePaneStore((state) => state.appendMessage)
   const userOption = useGlobalStore((state) => state.user)
 
+  const submitMessage = () => {
+    if (currentMessage === '') return
+    appendMessageIfUser()
+    updateCurrentMessage('')
+    pipe(
+      textField.current,
+      fromNullable,
+      doIfSome(
+        (field) => {
+          field.textContent = ''
+        }
+      )
+    )
+  }
 
   const appendMessageIfUser = () => pipe(
     userOption,
@@ -54,23 +68,16 @@ const TextField: React.FC = () => {
         ref={textField}
         className='text-field'
         contentEditable="true" onInput={(e) => updateCurrentMessage(getProperString(e.currentTarget.textContent))}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            submitMessage()
+            e.preventDefault()
+          }
+        }}
       >
 
       </div>
-      <div className='submit-button' onClick={() => {
-        if (currentMessage === '') return
-        appendMessageIfUser()
-        updateCurrentMessage('')
-        pipe(
-          textField.current,
-          fromNullable,
-          doIfSome(
-            (field) => {
-              field.textContent = ''
-            }
-          )
-        )
-      }} />
+      <div className='submit-button' onClick={submitMessage} />
     </div>
 
 

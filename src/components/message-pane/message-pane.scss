@@ -1,70 +1,84 @@
-$side-margin: 2%;
-$top-margin: 2%;
-$bottom-margin: 2%;
+$side-margin: 2rem;
+$top-margin: 1rem;
+$bottom-margin: 0;
 $border-radius: 10px;
-$padding: 2%;
+$padding: 1rem;
 $line-height: 1.5;
 
-.text-field-container, .message{
-  box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.5);
+.text-field-container,
+.message {
+  box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.message-pane {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: red 1px solid;
 }
 
 .message {
   background-color: $secondary-background-color;
+  width: 40rem;
   margin: $top-margin $side-margin $bottom-margin $side-margin;
-  padding: 2%;
+  padding: 1rem;
   border-radius: $border-radius;
-  .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .avatar {
+    margin: 0.1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+  }
+  .left-side {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     .display-name {
-      font-size: small;
+      font-size: 0.7rem;
       color: white;
-      font-weight: bold;
-    }
-    .avatar {
-      margin: 1%;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: white;
+      font-weight: 500;
     }
   }
 }
 .text-field-container {
-    margin: $top-margin $side-margin $bottom-margin $side-margin;
-    background-color: $secondary-background-color;
-    border-radius:  10pt;
-    box-sizing: border-box;
+  margin: $top-margin $side-margin $bottom-margin $side-margin;
+  background-color: $secondary-background-color;
+  border-radius: 10pt;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .text-field {
+    border-radius: 10pt;
+    border: none;
+    padding: $padding;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
-    .text-field {
-        border-radius:  10pt;
-        border: none;
-        padding: $padding;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        line-height: $line-height;
-        width: 100%;
-      }
-    .text-field:active, .text-field:focus {
-        outline: none;
-      }
-    .submit-button {
-        border-radius:  $border-radius;
-        margin: 5px;
-        padding: 17px;
-        background-color: #d87093;
-        cursor: pointer;
-        &:hover {
-          background-color: #d3809c;
-          color: white;
-        }
-      }
+    flex-direction: column;
+    justify-content: center;
+    line-height: $line-height;
+    width: 100%;
+    font-size: 0.8rem;
+  }
+  .text-field:active,
+  .text-field:focus {
+    outline: none;
+  }
+  .submit-button {
+    border-radius: $border-radius;
+    margin: 5px;
+    padding: 17px;
+    background-color: #d87093;
+    cursor: pointer;
+    &:hover {
+      background-color: #d3809c;
+      color: white;
+    }
+  }
 }
-
-

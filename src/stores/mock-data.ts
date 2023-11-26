@@ -1,9 +1,9 @@
-import { option } from "fp-ts"
+import * as O from 'fp-ts/Option'
 
 
 export const mockMessages = [
     {
-        id: option.some(0),
+        id: O.some(0),
         sender: {
             id: 0,
             handle: "admin",
@@ -14,7 +14,7 @@ export const mockMessages = [
         timestamp: new Date()
     },
     {
-        id: option.some(1),
+        id: O.some(1),
         sender: {
             id: 0,
             handle: "admin",
@@ -25,7 +25,7 @@ export const mockMessages = [
         timestamp: new Date()
     },
     {
-        id: option.some(2),
+        id: O.some(2),
         sender: {
             id: 0,
             handle: "admin",
@@ -35,4 +35,23 @@ export const mockMessages = [
         body: "Feel free to send a message to the chat!",
         timestamp: new Date()
     }
+]
+
+export const mockConverations = [
+    {
+        id: 1,
+        name: 'Test Conversation',
+        avatar: 'https://picsum.photos/200/200',
+        users: [
+            {
+                id: 5,
+                handle: 'test',
+                displayName: 'Test User',
+                avatar: 'https://picsum.photos/200/200'
+            }
+        ],
+        messages: mockMessages,
+        unreadMessageCount: 0
+    },
+
 ]
