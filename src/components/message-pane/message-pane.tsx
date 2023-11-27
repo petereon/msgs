@@ -8,9 +8,12 @@ const MessagePane: React.FC = () => {
   const messages = useMessagePaneStore((state) => state.messages);
   return (
     <div className="message-pane">
-      {messages.map((message, idx) => (
-        <MessageItem key={idx} message={message} />
-      ))}
+      <div className="messages">
+        {messages.map((message, idx) => (
+          <MessageItem key={idx} message={message} />
+        ))}
+      </div>
+
       <TextField />
     </div>
   );
