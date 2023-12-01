@@ -6,7 +6,7 @@ import { mockMessages } from './mock-data'
 interface MessagePaneState {
     messages: Message[],
     textFieldContent: string,
-    updateCurrentMessage: (message: string) => void
+    updateCurrentMessageText: (message: string) => void
 }
 
 export const useMessagePaneStore = create<MessagePaneState>((set) => ({
@@ -14,5 +14,5 @@ export const useMessagePaneStore = create<MessagePaneState>((set) => ({
         ...mockMessages
     ],
     textFieldContent: '',
-    updateCurrentMessage: (message: string) => set(() => ({ textFieldContent: message })),
+    updateCurrentMessageText: (message: string) => set(() => ({ textFieldContent: message })),
 }))

@@ -1,9 +1,12 @@
-import { Option } from "fp-ts/lib/Option";
+import { Either } from "fp-ts/lib/Either";
 import User from "./user";
 
+
+
 export default interface Message {
-    id: Option<number>,
+    id: Either<string, string>,
     sender: User,
     body: string,
     timestamp: Date,
+    isRead: boolean,
 }

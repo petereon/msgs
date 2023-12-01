@@ -9,7 +9,8 @@ import { mockConverations } from './mock-data'
 
 enum Action {
     Append,
-    Remove
+    Remove,
+    Update
 }
 
 interface GlobalState {
@@ -20,7 +21,8 @@ interface GlobalState {
     clearUser: () => void,
     setCurrentConversation: (conversation: Conversation) => void
     appendMessage: (message: Message) => void,
-    deleteMessage: (message: Message) => void
+    deleteMessage: (message: Message) => void,
+    updateMessage: (message: Message) => void
 }
 
 export const useGlobalStore = create<GlobalState>((set) => ({
@@ -43,43 +45,34 @@ export const useGlobalStore = create<GlobalState>((set) => ({
     setCurrentConversation: (conversation: Conversation) => set(() => ({ currentConversation: O.some(conversation) })),
     appendMessage: (message: Message) => set((state) => (getUpdatedConversationsState(state, message, Action.Append))),
     deleteMessage: (message: Message) => set((state) => (getUpdatedConversationsState(state, message, Action.Remove))),
+    updateMessage: (message: Message) => set((state) => (getUpdatedConversationsState(state, message, Action.Update))),
 }))
 
 
-function getUpdatedConversationsState(state: GlobalState, message: Message, action: Action): GlobalState | Partial<GlobalState> {
-    return pipe(
+const getUpdatedConversationsState = (state: GlobalState, message: Message, action: Action): GlobalState | Partial<GlobalState> =>
+    pipe(
         state.currentConversation,
         O.fold(
             () => state,
             (conversation) => {
                 const newConversations = updateConversations(state, conversation.id, message, action)
-                return ({
+                return {
                     currentConversation: findFirst<Conversation>(c => c.id === conversation.id)(newConversations),
                     conversations: newConversations
-                })
-            })
+                }
+            }
+        )
     )
+
+const updateConversations = (state: GlobalState, id: number, message: Message, action: Action): Conversation[] => {
+    return state.conversations.map(c => c.id === id ? ({
+        ...c,
+        messages: actionHandlers[action](c, message)
+    }) : c)
 }
 
-function updateConversations(state: GlobalState, id: number, message: Message, action: Action): Conversation[] {
-    if (action === Action.Remove) {
-        return state.conversations.map(c => c.id === id ? ({
-            ...c,
-            messages: removeMessageFromConversation(c, message)
-        }) : c)
-    } else if (action === Action.Append) {
-        return state.conversations.map(c => c.id === id ? ({
-            ...c,
-            messages: appendMessageToConversation(c, message)
-        }) : c)
-    }
-    return state.conversations
-}
-
-function appendMessageToConversation(c: Conversation, message: Message): Message[] {
-    return [...c.messages, message]
-}
-
-function removeMessageFromConversation(c: Conversation, message: Message): Message[] {
-    return c.messages.filter(m => m.id !== message.id)
+const actionHandlers = {
+    [Action.Append]: (c: Conversation, addedMessage: Message): Message[] => [...c.messages, addedMessage],
+    [Action.Remove]: (c: Conversation, removedMessage: Message): Message[] => c.messages.filter(message => message.id !== removedMessage.id),
+    [Action.Update]: (c: Conversation, updatedMessage: Message): Message[] => c.messages.map(message => message.id === updatedMessage.id ? updatedMessage : message)
 }

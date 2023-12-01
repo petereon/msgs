@@ -9,6 +9,7 @@ import { Conversation } from '../../types/conversation'
 const ConversationItem: React.FC<{ conversation: Conversation }> = ({ conversation }) => {
     const optional_last_message = last(conversation.messages)
     const setCurrentConversation = useGlobalStore((state) => state.setCurrentConversation)
+    const unreadMessageCount = conversation.messages.filter((message) => !message.isRead).length
     return (
         <div className='conversation-item' onClick={() => setCurrentConversation(conversation)}>
             <div className='top'>
@@ -33,7 +34,7 @@ const ConversationItem: React.FC<{ conversation: Conversation }> = ({ conversati
                         </div>
                     }
                     {
-                        conversation.unreadMessageCount > 0 && <div className='unread-message-count'>{conversation.unreadMessageCount}</div>
+                        unreadMessageCount > 0 && <div className='unread-message-count'>{unreadMessageCount}</div>
                     }
                 </div>
             </div>

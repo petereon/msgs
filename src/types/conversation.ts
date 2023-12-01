@@ -7,5 +7,4 @@ export interface Conversation {
     avatar: string,
     users: User[],
     messages: Message[],
-    unreadMessageCount: number
 }
