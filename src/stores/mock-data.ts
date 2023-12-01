@@ -54,4 +54,32 @@ export const mockConverations = [
         unreadMessageCount: 0
     },
 
+    {
+        id: 2,
+        name: 'Another Conversation',
+        avatar: 'https://www.freud-museum.at/assets/images/0/b-929-sigmund-freud-1921-e4f8ecdd.jpg',
+        users: [
+            {
+                id: 5,
+                handle: 'test',
+                displayName: 'Freud',
+                avatar: 'https://www.freud-museum.at/assets/images/0/b-929-sigmund-freud-1921-e4f8ecdd.jpg'
+            }
+        ],
+        messages: [
+            {
+                id: O.some(2),
+                sender: {
+                    id: 5,
+                    handle: 'test',
+                    displayName: 'Freud',
+                    avatar: 'https://www.freud-museum.at/assets/images/0/b-929-sigmund-freud-1921-e4f8ecdd.jpg'
+                },
+                body: "Your thoughts dwell on your mother.",
+                timestamp: new Date()
+            }
+        ],
+        unreadMessageCount: 1
+    }
+
 ]

@@ -2,4 +2,66 @@
   min-width: 20rem;
   background-color: $secondary-background-color;
   margin-bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  .conversation-item {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    padding: 0.8rem;
+    box-sizing: border-box;
+    margin: 0.3rem 1rem;
+    border-radius: 10pt;
+    cursor: pointer;
+
+    .top {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: white;
+      margin-right: 1rem;
+    }
+
+    .bottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+      width: 100%;
+      margin-top: 1rem;
+
+      .display-name {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: white;
+      }
+      .unread-count {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: white;
+        background-color: #d87093;
+        border-radius: 50%;
+        padding: 0.5rem;
+        margin-left: 1rem;
+      }
+    }
+
+    transition: scale 0.1s ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
 }

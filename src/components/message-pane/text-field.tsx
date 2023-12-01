@@ -20,7 +20,7 @@ const TextField: React.FC = () => {
 
   const currentMessage = useMessagePaneStore((state) => state.textFieldContent)
   const updateCurrentMessage = useMessagePaneStore((state) => state.updateCurrentMessage)
-  const appendMessage = useMessagePaneStore((state) => state.appendMessage)
+  const appendMessage = useGlobalStore((state) => state.appendMessage)
   const userOption = useGlobalStore((state) => state.user)
 
   const submitMessage = () => {

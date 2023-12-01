@@ -1,7 +1,7 @@
 import './app.scss'
 import MessagePaneView from './components/message-pane/message-pane'
 import NavbarPane from './components/navbar/navbar-pane'
-import SidebarPane from './components/sidebar/sidebar-pane'
+import Sidebar from './components/sidebar/sidebar'
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     <>
       <NavbarPane />
       <div className="app">
-        <SidebarPane />
+        <Sidebar />
         <div className="app__content">
           <MessagePaneView />
         </div>
