@@ -7,10 +7,12 @@ import Message from '../../types/message'
 import User from '../../types/user'
 import { doIfSome, hash, makeTempId } from '../../utils/f'
 
-const createNewMessage: (body: string, sender: User) => Message = (body, sender) => ({
+// TODO:  It would be better to deal with image object directly rather than string and then only appending
+const createNewMessage: (body: string, sender: User, images: string[]) => Message = (body, sender, images) => ({
   id: makeTempId(hash(`${body}${sender.handle}`)),
   sender: sender,
   body: body,
+  images: images,
   timestamp: new Date(),
   isRead: true,
 })
@@ -42,7 +44,8 @@ const TextField: React.FC = () => {
     userOption,
     fold(
       () => console.log('no user'),
-      (user: User) => appendMessage(createNewMessage(currentMessage, user))
+      // TODO: images are not implemented yet
+      (user: User) => appendMessage(createNewMessage(currentMessage, user, []))
     ))
 
 
