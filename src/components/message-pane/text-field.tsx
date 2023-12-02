@@ -77,7 +77,8 @@ const TextField: React.FC = () => {
       >
 
       </div>
-      <div className='submit-button' onClick={submitMessage} />
+      <div className='text-field-button images-button' onClick={submitMessage} />
+      <div className='text-field-button' onClick={submitMessage}>+</div>
     </div>
 
 

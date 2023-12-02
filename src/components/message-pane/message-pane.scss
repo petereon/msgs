@@ -64,11 +64,12 @@ $line-height: 1.5;
 .text-field-container {
   margin: $top-margin $side-margin $bottom-margin $side-margin;
   background-color: $secondary-background-color;
-  border-radius: 10pt;
+  border-radius: 20pt;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-right: 0.5rem;
 
   .text-field {
     border-radius: 10pt;
@@ -85,9 +86,9 @@ $line-height: 1.5;
   .text-field:focus {
     outline: none;
   }
-  .submit-button {
-    border-radius: $border-radius;
-    margin: 5px;
+  .text-field-button {
+    border-radius: 20pt;
+    margin: 8px 3px;
     padding: 17px;
     background-color: #d87093;
     cursor: pointer;

@@ -6,7 +6,7 @@ import MessageItem from "./message-item";
 import './message-pane.scss';
 import TextField from "./text-field";
 
-const MessagePane: React.FC = () => {
+const MessagesContainer: React.FC = () => {
   const messages = useGlobalStore((state) => pipe(
     state.currentConversation,
     fold(
@@ -14,13 +14,18 @@ const MessagePane: React.FC = () => {
       (conversation) => conversation.messages)
   ));
   return (
-    <div className="message-pane">
-      <div className="messages">
-        {messages.map((message, idx) => (
-          <MessageItem key={idx} message={message} />
-        ))}
-      </div>
+    <div className="messages">
+      {messages.map((message, idx) => (
+        <MessageItem key={idx} message={message} />
+      ))}
+    </div>
+  );
+}
 
+const MessagePane: React.FC = () => {
+  return (
+    <div className="message-pane">
+      <MessagesContainer />
       <TextField />
     </div>
   );
