@@ -42,11 +42,17 @@
       width: 100%;
       margin-top: 1rem;
 
-      .display-name {
-        font-size: 1.2rem;
-        font-weight: 500;
+      .sender {
+        // font-size: 1.2rem;
+        font-weight: 700;
         color: white;
       }
+      .body {
+        // font-size: 1rem;
+        font-weight: 300;
+        color: white;
+      }
+
       .unread-count {
         font-size: 0.8rem;
         font-weight: 500;

@@ -28,31 +28,34 @@ $line-height: 1.5;
   box-sizing: border-box;
   background-color: $background-color;
   margin: $top-margin $side-margin $bottom-margin $side-margin;
-  .message {
-    background-color: $secondary-background-color;
-    width: 40rem;
-    margin: $top-margin $side-margin $bottom-margin $side-margin;
-    padding: 1rem;
-    border-radius: $border-radius;
+  .message-row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .avatar {
-      margin: 0.1rem;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background-color: white;
-    }
-    .left-side {
+    .message {
+      background-color: $secondary-background-color;
+      width: 40rem;
+      margin: $top-margin $side-margin $bottom-margin $side-margin;
+      padding: 1rem;
+      border-radius: $border-radius;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-between;
-      .display-name {
-        font-size: 0.7rem;
-        color: white;
-        font-weight: 500;
+
+      .avatar {
+        margin: 0.1rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+      }
+      .left-side {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .display-name {
+          font-size: 0.7rem;
+          color: white;
+          font-weight: 500;
+        }
       }
     }
   }
@@ -93,4 +96,8 @@ $line-height: 1.5;
       color: white;
     }
   }
+}
+
+.right-align {
+  flex-direction: row-reverse;
 }

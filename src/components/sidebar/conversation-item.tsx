@@ -25,7 +25,6 @@ const ConversationItem: React.FC<{ conversation: Conversation }> = ({ conversati
 
                 </div>
                 <div className='right'>
-
                     {isSome(optional_last_message) &&
                         <div className='last-message'>
                             <div className='sender'>{optional_last_message.value.sender.displayName}</div>

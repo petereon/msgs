@@ -1,9 +1,9 @@
-import * as O from 'fp-ts/Option'
+import * as E from 'fp-ts/Either'
 
 
 export const mockMessages = [
     {
-        id: O.some(0),
+        id: E.left("0"),
         sender: {
             id: 0,
             handle: "admin",
@@ -15,7 +15,7 @@ export const mockMessages = [
         isRead: true,
     },
     {
-        id: O.some(1),
+        id: E.left("1"),
         sender: {
             id: 0,
             handle: "admin",
@@ -27,7 +27,7 @@ export const mockMessages = [
         isRead: true,
     },
     {
-        id: O.some(2),
+        id: E.left("2"),
         sender: {
             id: 0,
             handle: "admin",
@@ -65,17 +65,17 @@ export const mockConverations = [
         users: [
             {
                 id: 5,
-                handle: 'test',
+                handle: 'freud',
                 displayName: 'Freud',
                 avatar: 'https://www.freud-museum.at/assets/images/0/b-929-sigmund-freud-1921-e4f8ecdd.jpg'
             }
         ],
         messages: [
             {
-                id: O.some(2),
+                id: E.left('1'),
                 sender: {
                     id: 5,
-                    handle: 'test',
+                    handle: 'freud',
                     displayName: 'Freud',
                     avatar: 'https://www.freud-museum.at/assets/images/0/b-929-sigmund-freud-1921-e4f8ecdd.jpg'
                 },
