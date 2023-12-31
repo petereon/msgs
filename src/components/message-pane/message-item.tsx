@@ -1,5 +1,4 @@
-import { Option, fold } from 'fp-ts/lib/Option'
-import { pipe } from 'fp-ts/lib/function'
+import { Option } from 'effect'
 import React from 'react'
 import { useGlobalStore } from '../../stores/global-store'
 import Message from '../../types/message'
@@ -37,12 +36,9 @@ const MessageItem: React.FC<{ message: Message }> = ({ message }) => {
   )
 }
 
-const isOwnMessage = (message: Message, user: Option<User>) => pipe(
-  user,
-  fold(
-    () => false,
-    (user) => message.sender.handle === user.handle
-  )
-)
+const isOwnMessage = (message: Message, userOption: Option.Option<User>) => Option.match(userOption, {
+  onNone: () => false,
+  onSome: (user) => message.sender.handle === user.handle
+})
 
 export default MessageItem

@@ -1,9 +1,9 @@
-import * as E from 'fp-ts/Either'
+
 
 
 export const mockMessages = [
     {
-        id: E.left("0"),
+        id: { id: "0", isTempId: false },
         sender: {
             id: 0,
             handle: "admin",
@@ -16,7 +16,7 @@ export const mockMessages = [
         isRead: true,
     },
     {
-        id: E.left("1"),
+        id: { id: "1", isTempId: false },
         sender: {
             id: 0,
             handle: "admin",
@@ -29,7 +29,7 @@ export const mockMessages = [
         isRead: true,
     },
     {
-        id: E.left("2"),
+        id: { id: "2", isTempId: false },
         sender: {
             id: 0,
             handle: "admin",
@@ -75,7 +75,7 @@ export const mockConverations = [
         ],
         messages: [
             {
-                id: E.left('1'),
+                id: { id: "1", isTempId: false },
                 sender: {
                     id: 5,
                     handle: 'freud',

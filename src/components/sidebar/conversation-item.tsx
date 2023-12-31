@@ -1,5 +1,6 @@
-import { last } from 'fp-ts/lib/Array'
-import { isSome } from 'fp-ts/lib/Option'
+
+import { Option } from 'effect'
+import { last } from 'effect/ReadonlyArray'
 import React from 'react'
 import { useGlobalStore } from '../../stores/global-store'
 import { Conversation } from '../../types/conversation'
@@ -14,7 +15,7 @@ const ConversationItem: React.FC<{ conversation: Conversation }> = ({ conversati
         <div className='conversation-item' onClick={() => setCurrentConversation(conversation)}>
             <div className='top'>
                 <div className='display-name'>{conversation.name}</div>
-                {isSome(optional_last_message) && <div className='timestamp'>{optional_last_message.value.timestamp.toLocaleString()}</div>}
+                {Option.isSome(optional_last_message) && <div className='timestamp'>{optional_last_message.value.timestamp.toLocaleString()}</div>}
 
             </div>
 
@@ -25,7 +26,7 @@ const ConversationItem: React.FC<{ conversation: Conversation }> = ({ conversati
 
                 </div>
                 <div className='right'>
-                    {isSome(optional_last_message) &&
+                    {Option.isSome(optional_last_message) &&
                         <div className='last-message'>
                             <div className='sender'>{optional_last_message.value.sender.displayName}</div>
                             <div className='body'>{optional_last_message.value.body}</div>

@@ -1,5 +1,5 @@
-import { fold, fromNullable, getOrElse } from 'fp-ts/Option'
-import { pipe } from 'fp-ts/function'
+
+import { Option, pipe } from 'effect'
 import React, { useEffect, useRef } from 'react'
 import { useGlobalStore } from '../../stores/global-store'
 import { useMessagePaneStore } from '../../stores/message-pane-store'
@@ -31,7 +31,7 @@ const TextField: React.FC = () => {
     updateCurrentMessage('')
     pipe(
       textField.current,
-      fromNullable,
+      Option.fromNullable,
       doIfSome(
         (field) => {
           field.textContent = ''
@@ -40,24 +40,20 @@ const TextField: React.FC = () => {
     )
   }
 
-  const appendMessageIfUser = () => pipe(
-    userOption,
-    fold(
-      () => console.log('no user'),
-      // TODO: images are not implemented yet
-      (user: User) => appendMessage(createNewMessage(currentMessage, user, []))
-    ))
 
 
-  const getProperString = (value: string | null) => pipe(
-    value,
-    fromNullable,
-    getOrElse(() => ''),
-  )
+  const appendMessageIfUser = () => Option.match(userOption, {
+    onNone: () => console.log('no user'),
+    onSome: (user) => appendMessage(createNewMessage(currentMessage, user, []))
+  })
+
+
+
+  const getProperString = (value: string | null) => Option.getOrElse(Option.fromNullable(value), () => '')
 
   useEffect(() => pipe(
     textField.current,
-    fromNullable,
+    Option.fromNullable,
     doIfSome(
       (field) => {
         field.textContent = currentMessage

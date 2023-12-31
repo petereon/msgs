@@ -1,8 +1,12 @@
-import { Either } from "fp-ts/lib/Either";
 import User from "./user";
 
+export interface IdType {
+    id: string,
+    isTempId: boolean,
+}
+
 export default interface Message {
-    id: Either<string, string>,
+    id: IdType,
     sender: User,
     body: string,
     images: string[],

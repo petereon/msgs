@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "effect": "^2.0.0-next.62",
     "folktale": "^2.3.2",
-    "fp-ts": "^2.16.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.4.6"

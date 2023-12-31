@@ -1,6 +1,5 @@
-import * as O from 'fp-ts/Option'
-import { findFirst } from 'fp-ts/lib/Array'
-import { pipe } from 'fp-ts/lib/function'
+import { Option } from 'effect'
+import { findFirst } from 'effect/ReadonlyArray'
 import { create } from 'zustand'
 import { Conversation } from '../types/conversation'
 import Message from '../types/message'
@@ -14,9 +13,9 @@ enum Action {
 }
 
 interface GlobalState {
-    user: O.Option<User>,
+    user: Option.Option<User>,
     conversations: Conversation[],
-    currentConversation: O.Option<Conversation>,
+    currentConversation: Option.Option<Conversation>,
     setUser: (user: User) => void,
     clearUser: () => void,
     setCurrentConversation: (conversation: Conversation) => void
@@ -26,7 +25,7 @@ interface GlobalState {
 }
 
 export const useGlobalStore = create<GlobalState>((set) => ({
-    user: O.some({
+    user: Option.some({
         id: 5,
         handle: 'test',
         displayName: 'Test User',
@@ -35,36 +34,33 @@ export const useGlobalStore = create<GlobalState>((set) => ({
     conversations: [
         ...mockConverations
     ],
-    currentConversation: O.some({
+    currentConversation: Option.some({
         ...mockConverations[0]
     }),
 
 
-    setUser: (user: User) => set(() => ({ user: O.some(user) })),
-    clearUser: () => set(() => ({ user: O.none })),
-    setCurrentConversation: (conversation: Conversation) => set(() => ({ currentConversation: O.some(conversation) })),
+    setUser: (user: User) => set(() => ({ user: Option.some(user) })),
+    clearUser: () => set(() => ({ user: Option.none() })),
+    setCurrentConversation: (conversation: Conversation) => set(() => ({ currentConversation: Option.some(conversation) })),
     appendMessage: (message: Message) => set((state) => (getUpdatedConversationsState(state, message, Action.Append))),
     deleteMessage: (message: Message) => set((state) => (getUpdatedConversationsState(state, message, Action.Remove))),
     updateMessage: (message: Message) => set((state) => (getUpdatedConversationsState(state, message, Action.Update))),
 }))
 
-
 const getUpdatedConversationsState = (state: GlobalState, message: Message, action: Action): GlobalState | Partial<GlobalState> =>
-    pipe(
-        state.currentConversation,
-        O.fold(
-            () => state,
-            (conversation) => {
-                const newConversations = updateConversations(state, conversation.id, message, action)
-                return {
-                    currentConversation: findFirst<Conversation>(c => c.id === conversation.id)(newConversations),
-                    conversations: newConversations
-                }
+    Option.match(state.currentConversation, {
+        onNone: () => state,
+        onSome: (conversation) => {
+            const newConversations = getUpdatedCoversations(state, conversation.id, message, action)
+            return {
+                currentConversation: findFirst(newConversations, c => c.id === conversation.id),
+                conversations: newConversations
             }
-        )
+        }
+    }
     )
 
-const updateConversations = (state: GlobalState, id: number, message: Message, action: Action): Conversation[] => {
+const getUpdatedCoversations = (state: GlobalState, id: number, message: Message, action: Action): Conversation[] => {
     return state.conversations.map(c => c.id === id ? ({
         ...c,
         messages: actionHandlers[action](c, message)

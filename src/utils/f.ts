@@ -1,19 +1,13 @@
-import { either } from "fp-ts"
-import { Either, isRight } from "fp-ts/lib/Either"
-import { Option, fold } from "fp-ts/lib/Option"
+import { Option } from "effect"
+import { IdType } from "../types/message"
 
-export const doIfSome = <T>(fn: (value: T) => void): ((maybe: Option<T>) => void) => {
-    return (maybe: Option<T>) => {
-        fold(
-            () => { },
-            fn
-        )(maybe)
-    }
-}
 
-export const isTempId = isRight<Either<string, string>>
-export const makeTempId = (id: string): Either<string, string> => either.right(id)
-export const makeId = (id: string): Either<string, string> => either.left(id)
+
+export const isTempId = (id: IdType) => id.isTempId
+
+export const makeTempId = (id: string): IdType => ({ id, isTempId: true })
+
+export const makeId = (id: string): IdType => ({ id, isTempId: false })
 
 export const hash = (str: string): string => {
     let h = 0, i, chr;
@@ -25,3 +19,8 @@ export const hash = (str: string): string => {
     }
     return String(h);
 }
+
+export const doIfSome = <T>(fn: (t: T) => void) => (option: Option.Option<T>) => Option.match(option, {
+    onNone: () => { },
+    onSome: (t) => fn(t)
+})
