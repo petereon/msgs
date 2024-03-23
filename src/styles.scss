@@ -1,0 +1,15 @@
+@import "sass/base.scss";
+
+.container {
+    box-sizing: border-box;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(
+        to top in oklch,
+        hsl(231, 11%, 35%),
+        hsl(300, 3%, 6%)
+    );
+}

@@ -1,0 +1,63 @@
+.sidebar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &__head,
+    &__drop {
+        min-width: 250px;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+    }
+
+    &__head {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        padding: 0 1rem;
+
+        min-height: 6rem;
+        &__button {
+            display: flex;
+
+            color: white;
+            font-size: 2rem;
+            height: 4rem;
+            width: 4rem;
+            margin-right: 1rem;
+            border-radius: 1rem;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+
+            &:hover {
+                scale: 1.1;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__drop {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem;
+        height: 100%;
+        margin-top: 1rem;
+    }
+}
+
+#hook-button {
+    background-color: rgb(4, 138, 138);
+}
+
+#bots-button {
+    background-color: rgb(138, 4, 4);
+}
+
+#runners-button {
+    background-color: rgb(138, 138, 4);
+}
