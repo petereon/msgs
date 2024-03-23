@@ -1,48 +1,52 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { githubDark } from '@uiw/codemirror-theme-github';
+import React, { useState, useRef, useEffect } from 'react';
+import * as monaco from 'monaco-editor';
 import './editor.scss';
 
 const Editor: React.FC = () => {
     const [value, setValue] = useState("console.log('hello world!');");
-    const [editorHeight, setEditorHeight] = useState(0);
 
+    const editorContainerRef = useRef<HTMLDivElement>(null);
     const editorRef = useRef<HTMLDivElement>(null);
 
-    const onChange = useCallback((val: string) => {
-        setValue(val);
-    }, []);
-
     useEffect(() => {
+        if (editorRef.current) {
+            const editorElement = editorRef.current;
+            const editor = monaco.editor.create(editorElement, {
+                value,
+                language: 'javascript',
+                theme: 'vs-dark',
+                automaticLayout: false,
 
-        const handleResize = () => {
-            if (editorRef.current) {
-                const editorElement = editorRef.current;
-                setEditorHeight(editorElement.clientHeight);
-            }
-        };
+            });
 
-        handleResize();
+            window.addEventListener('resize', () => {
+                // make editor as small as possible
+                editor.layout({ width: 0, height: 0 })
 
-        window.addEventListener('resize', handleResize);
+                // wait for next frame to ensure last layout finished
+                window.requestAnimationFrame(() => {
+                    // get the parent dimensions and re-layout the editor
+                    const rect = editorContainerRef.current?.getBoundingClientRect()
+                    if (rect) {
+                        editor.layout({ width: rect.width, height: rect.height })
+                    }
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+                })
+            })
 
+            editor.onDidChangeModelContent(() => {
+                setValue(editor.getValue());
+            });
+
+            return () => {
+                editor.dispose();
+            };
+        }
     }, []);
 
     return (
-        <div className='editor' ref={editorRef}>
-            <CodeMirror
-                value={value}
-                height={`${editorHeight}px`}
-                extensions={[javascript({ jsx: true })]}
-                onChange={onChange}
-                theme={githubDark}
-
-            />
+        <div ref={editorContainerRef} className='editor'>
+            <div ref={editorRef} className='editor__container'></div>
         </div>
     );
 };
