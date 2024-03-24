@@ -1,0 +1,32 @@
+.hook-creator {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: $color-element-bg;
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.1);
+    justify-content: space-around;
+    align-items: center;
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 7rem;
+        width: 7rem;
+        // background-image: $flamboyant-bg;
+        background-color: rgba(50, 50, 50, 0.2);
+
+        box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.2);
+        border-radius: 1rem;
+        transition: all 0.2s;
+        font-size: 4rem;
+        color: rgb(150, 150, 150);
+
+        &:hover {
+            scale: 1.1;
+            cursor: pointer;
+        }
+    }
+}

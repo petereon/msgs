@@ -1,6 +1,46 @@
 .navbar {
-    min-height: 6rem;
+    height: 6rem;
     width: 100%;
-    background-color: red;
-    border-radius: 1rem;
+    margin-bottom: $between-components;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &__left,
+    &__right {
+        min-width: 250px;
+        background-color: $color-element-bg;
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.3);
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        padding: 0 $between-components;
+
+        min-height: 6rem;
+        &__button {
+            display: flex;
+
+            color: white;
+            font-size: 2rem;
+            height: 4rem;
+            width: 4rem;
+            margin-right: 1rem;
+            border-radius: 1rem;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+
+            &:hover {
+                scale: 1.1;
+                cursor: pointer;
+            }
+        }
+    }
 }

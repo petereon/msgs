@@ -3,6 +3,7 @@ import * as monaco from 'monaco-editor';
 import './editor.scss';
 
 const Editor: React.FC = () => {
+
     const [value, setValue] = useState("console.log('hello world!');");
 
     const editorContainerRef = useRef<HTMLDivElement>(null);
